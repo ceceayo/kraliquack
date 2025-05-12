@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://pt0lxk4ofxbw"]
+
+[ext_resource type="Script" uid="uid://b8kjcdwa74ig7" path="res://new_world.gd" id="1_jlt2n"]
+
+[node name="NewWorld" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jlt2n")
+
+[node name="WorldName" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.6
+anchor_bottom = 0.2
+offset_left = -34.2812
+offset_right = 34.2812
+offset_bottom = 31.0
+grow_horizontal = 2
+placeholder_text = "World name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="StartWorld" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Start World"
+
+[node name="GoBack" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="HBoxContainer/StartWorld" to="." method="_on_start_world_pressed"]
+[connection signal="pressed" from="HBoxContainer/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

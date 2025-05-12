@@ -1,0 +1,93 @@
+﻿@page "/users"
+@using StackExchange.Redis
+@using UGS.Shared
+@rendermode InteractiveServer
+@inject UserAccountService Uas
+@inject SharedUniversalGameServerDataBaseContext db
+@inject IDatabase redis
+@inject ILogger<UGS.AdminPanel.Components.Pages.Users> logger
+@inject IToastService ToastService
+
+<PageTitle>UAS Tester</PageTitle>
+
+<h1>UserAccountService Tester</h1>
+
+<h2>Create user</h2>
+<FluentTextField Label="Username" @bind-Value="username"/>
+<FluentTextField Label="Password" @bind-Value="password"/><br/>
+<FluentSwitch Label="Administrator" @bind-Value="admin"/><br/>
+
+<FluentButton Title="Create user" @onclick="CreateUser">Create user</FluentButton><br/>
+
+<FluentDivider/>
+
+<h2>Start a session</h2>
+<FluentTextField Label="Username" @bind-Value="username"/>
+<FluentTextField Label="Password" @bind-Value="password"/><br/>
+
+<FluentButton Title="Start session" @onclick="StartSession">Start session</FluentButton><br/>
+
+<FluentDivider/>
+
+<h2>Verify a session</h2>
+<FluentTextField Label="Token" @bind-Value="token"/><br/>
+
+<FluentButton Title="Verify session" @onclick="VerifySession">Verify session</FluentButton><br/>
+
+@code {
+
+    string? username, password, token;
+    bool admin;
+    
+    void CreateUser()
+    {
+        switch (Uas.NewUser(db, logger, username!, password!, admin))
+        {
+            case NewUserResult.Error:
+                ToastService.ShowError("An error occured");
+                return;
+            case NewUserResult.UserAlreadyExists:
+                ToastService.ShowError("User already exists");
+                return;
+            case NewUserResult.UserCreated:
+                ToastService.ShowSuccess("User created");
+                return;
+                
+        } 
+    }
+
+    void StartSession()
+    {
+        (StartSessionResult result, string? token) sesh = Uas.StartSession(db, redis, logger, username!, password!);
+        switch (sesh.result)
+        {
+            case StartSessionResult.Error:
+                ToastService.ShowError("An error occured");
+                return;
+            case StartSessionResult.UserDoesNotExist:
+                ToastService.ShowError("User does not exist");
+                return;
+            case StartSessionResult.WrongPassword:
+                ToastService.ShowError("Wrong password");
+                return;
+            case StartSessionResult.SessionStarted:
+                ToastService.ShowSuccess($"Session started. Your token is {sesh.token}.");
+                return;
+        }
+    }
+
+    private void VerifySession()
+    {
+        var sessionVerificationResult = Uas.VerifySession(db, redis, logger, token ?? "");
+        switch (sessionVerificationResult.success)
+        {
+            case false:
+                ToastService.ShowError("Session is invalid");
+                return;
+            case true:
+                ToastService.ShowSuccess("Token is valid. Your userId is " + sessionVerificationResult.userId);
+                return;
+        }
+    }
+
+}

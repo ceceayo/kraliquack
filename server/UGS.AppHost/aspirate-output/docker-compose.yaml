@@ -1,0 +1,121 @@
+services:
+  aspire-dashboard:
+    container_name: "aspire-dashboard"
+    image: "mcr.microsoft.com/dotnet/aspire-dashboard:9.0"
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
+    ports:
+    - target: 18888
+      published: 18888
+    restart: unless-stopped
+  cache:
+    container_name: "cache"
+    image: "docker.io/library/redis:7.4"
+    environment:
+      REDIS_PASSWORD: "6An8Yvp6QjvNKwi3XIT8l4"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "cache"
+    ports:
+    - target: 6379
+      published: 6379
+    command:
+    - "-c"
+    - "redis-server --requirepass $REDIS_PASSWORD"
+    - "/bin/sh"
+    restart: unless-stopped
+  queue:
+    container_name: "queue"
+    image: "docker.io/library/rabbitmq:4.0-management"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "iiai5Xu1CthQrGLnGse3zL"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "queue"
+    ports:
+    - target: 5672
+      published: 5672
+    - target: 15672
+      published: 15672
+    restart: unless-stopped
+  postgres:
+    container_name: "postgres"
+    image: "docker.io/library/postgres:17.2"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "scram-sha-256"
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "6j!0bpcdHQxaE3MDZBQdD3"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "postgres"
+    volumes:
+    - "ugs-apphost-a01239b78c-postgres-data:/var/lib/postgresql/data"
+    ports:
+    - target: 5432
+      published: 5432
+    restart: unless-stopped
+  migrationworker:
+    container_name: "migrationworker"
+    image: "ugs/migrationworker:latest"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+      ConnectionStrings__postgresdb: "Host=postgres;Port=5432;Username=postgres;Password=6j!0bpcdHQxaE3MDZBQdD3;Database=postgresdb"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "migrationworker"
+    restart: unless-stopped
+  worker:
+    container_name: "worker"
+    image: "ugs/worker:latest"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+      ConnectionStrings__cache: "cache:6379,password=6An8Yvp6QjvNKwi3XIT8l4"
+      ConnectionStrings__postgresdb: "Host=postgres;Port=5432;Username=postgres;Password=6j!0bpcdHQxaE3MDZBQdD3;Database=postgresdb"
+      ConnectionStrings__queue: "amqp://guest:iiai5Xu1CthQrGLnGse3zL@queue:5672"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "worker"
+    restart: unless-stopped
+  apiservice:
+    container_name: "apiservice"
+    image: "ugs/apiservice:latest"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+      ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+      HTTP_PORTS: "8080"
+      ConnectionStrings__cache: "cache:6379,password=6An8Yvp6QjvNKwi3XIT8l4"
+      ConnectionStrings__postgresdb: "Host=postgres;Port=5432;Username=postgres;Password=6j!0bpcdHQxaE3MDZBQdD3;Database=postgresdb"
+      ConnectionStrings__queue: "amqp://guest:iiai5Xu1CthQrGLnGse3zL@queue:5672"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "apiservice"
+    ports:
+    - target: 8080
+      published: 10000
+    - target: 8443
+      published: 10001
+    restart: unless-stopped
+  adminpanel:
+    container_name: "adminpanel"
+    image: "ugs/adminpanel:latest"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+      ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+      HTTP_PORTS: "8080"
+      ConnectionStrings__cache: "cache:6379,password=6An8Yvp6QjvNKwi3XIT8l4"
+      ConnectionStrings__postgresdb: "Host=postgres;Port=5432;Username=postgres;Password=6j!0bpcdHQxaE3MDZBQdD3;Database=postgresdb"
+      ConnectionStrings__queue: "amqp://guest:iiai5Xu1CthQrGLnGse3zL@queue:5672"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "adminpanel"
+    ports:
+    - target: 8080
+      published: 10002
+    - target: 8443
+      published: 10003
+    restart: unless-stopped
+volumes:
+  ugs-apphost-a01239b78c-postgres-data: {}

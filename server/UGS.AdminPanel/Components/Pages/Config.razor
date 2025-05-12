@@ -1,0 +1,43 @@
+﻿@page "/config"
+@using Microsoft.FluentUI.AspNetCore.Components.Icons.Regular
+@using UGS.Shared
+@rendermode InteractiveServer
+@inject ILogger<UGS.AdminPanel.Components.Pages.Database> Logger
+@inject IToastService ToastService
+@inject UGS.Shared.ConfigService ConfigService
+@inject SharedUniversalGameServerDataBaseContext db
+
+<PageTitle>Config</PageTitle>
+
+<h1>Config</h1>
+
+<h2>GetOrSet</h2>
+<FluentTextField Label="Key" @bind-Value="ConfigKey"/>
+<FluentTextField Label="Default Value" @bind-Value="DefaultValue" /><br/>
+<FluentButton Title="Get Or Set Config" @onclick="GetOrSetConfigKey">Get Or Set Config</FluentButton>
+<FluentButton Title="Overwrite Config" @onclick="OverwriteConfigKey">Overwrite Config</FluentButton><br/>
+
+<FluentDivider />
+
+<h2>Config</h2>
+<FluentDataGrid Items="@db.ConfigKeys">
+    <PropertyColumn Property="@(p => p.Key)"></PropertyColumn>
+    <PropertyColumn Property="@(p => p.Value)"></PropertyColumn>
+</FluentDataGrid>
+
+@code
+{
+    string ConfigKey = "";
+    string DefaultValue = "";
+    
+    void GetOrSetConfigKey()
+    {
+        var result = ConfigService.GetOrSetConfigKey(ConfigKey, DefaultValue);
+        ToastService.ShowSuccess($"Config value: {result}");
+    }
+    void OverwriteConfigKey()
+    {
+        ConfigService.OverWriteConfigKey(ConfigKey, DefaultValue);
+        ToastService.ShowSuccess($"Config value overwritten");
+    }
+}

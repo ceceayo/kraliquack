@@ -1,0 +1,25 @@
+﻿@page "/database"
+@using Microsoft.EntityFrameworkCore
+@using UGS.Shared
+@rendermode InteractiveServer
+@inject ILogger<UGS.AdminPanel.Components.Pages.Database> Logger
+@inject SharedUniversalGameServerDataBaseContext db
+@inject IToastService ToastService
+
+<PageTitle>Database</PageTitle>
+
+<h1>Database</h1>
+
+<FluentButton Appearance="Appearance.Accent" @onclick="MigrateDb">Migrate Database</FluentButton>
+
+@code {
+    private async Task MigrateDb()
+    {
+        ToastService.ShowInfo("Migrating database");
+        Logger.LogInformation("Now migrating database");
+        await db.Database.MigrateAsync();
+        Logger.LogInformation("Finished database migrations!");
+        
+        ToastService.ShowSuccess("Migrated database successfully");
+    }
+}

@@ -1,0 +1,9 @@
+.   desert
+r   rock
+#   baricade
+h   headquarters duck
+H   headquarters bug
+p   powerplant
+b   barracks
+m   mine
+f   factory

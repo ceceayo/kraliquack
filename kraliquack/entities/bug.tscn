@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt6w0v1y4ootk"]
+
+[ext_resource type="PackedScene" uid="uid://be5di4f7y4bcw" path="res://soldier.tscn" id="1_k2nlc"]
+[ext_resource type="Texture2D" uid="uid://c26f2wh64n74" path="res://textures/headquartersbug.png" id="2_py186"]
+
+[node name="Bug" instance=ExtResource("1_k2nlc")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_py186")
+
+[node name="ShootTimer" type="Timer" parent="." index="1"]
+wait_time = 0.2
+autostart = true
+
+[node name="WanderTimer" type="Timer" parent="." index="2"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_shoot"]
+[connection signal="timeout" from="WanderTimer" to="." method="_wander"]

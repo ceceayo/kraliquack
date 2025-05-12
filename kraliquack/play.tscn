@@ -1,0 +1,241 @@
+[gd_scene load_steps=13 format=3 uid="uid://mhccyxvexb0u"]
+
+[ext_resource type="Script" uid="uid://ci3b0f8h57mk3" path="res://play.gd" id="1_b5e5s"]
+[ext_resource type="TileSet" uid="uid://cofinanjot4bs" path="res://tileset.tres" id="2_wnt6v"]
+[ext_resource type="Texture2D" uid="uid://dyn6jiw10hekf" path="res://select.png" id="3_yuxfv"]
+[ext_resource type="Script" uid="uid://dxmlwnokpu55l" path="res://drag_field.gd" id="4_2jglr"]
+[ext_resource type="Texture2D" uid="uid://gxb373to1fcr" path="res://textures/headquartersduck.png" id="5_j5m8q"]
+[ext_resource type="Texture2D" uid="uid://c26f2wh64n74" path="res://textures/headquartersbug.png" id="6_y08r1"]
+[ext_resource type="Texture2D" uid="uid://cnwwwmwccp61k" path="res://textures/powerplant.png" id="7_y08r1"]
+[ext_resource type="Texture2D" uid="uid://dct2yup1yrhtq" path="res://textures/barracks.png" id="8_3ib3j"]
+[ext_resource type="Texture2D" uid="uid://hfcu8uao8s8w" path="res://textures/mine.png" id="9_iu7w4"]
+[ext_resource type="Texture2D" uid="uid://chicqocp4kltf" path="res://textures/factory.png" id="10_6sspi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ca36m"]
+
+[sub_resource type="Theme" id="Theme_j5m8q"]
+Button/styles/focus = SubResource("StyleBoxEmpty_ca36m")
+
+[node name="Play" type="Node"]
+script = ExtResource("1_b5e5s")
+metadata/_edit_horizontal_guides_ = [-35.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_wnt6v")
+navigation_enabled = false
+
+[node name="entities" type="Node2D" parent="."]
+
+[node name="SelectionShower" type="Sprite2D" parent="."]
+texture = ExtResource("3_yuxfv")
+offset = Vector2(32, 32)
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = SubResource("Theme_j5m8q")
+
+[node name="DragField" type="Control" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_2jglr")
+
+[node name="Panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="GUI/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HeadquartersDuck" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Duck HQ
+2500$ / 0⚡︎
+Join the ducks"
+icon = ExtResource("5_j5m8q")
+
+[node name="HeadquartersBug" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Bug HQ
+2500$ / 0⚡︎
+Join the bugs"
+icon = ExtResource("6_y08r1")
+
+[node name="Powerplant" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Powerplant
+1000$ / 20⚡︎
++50⚡︎"
+icon = ExtResource("7_y08r1")
+
+[node name="Mine" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Mine
+1500$ / 30⚡︎
++25$"
+icon = ExtResource("9_iu7w4")
+
+[node name="Barracks" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Barracks
+1000$ / 30⚡︎
+Start shootin'"
+icon = ExtResource("8_3ib3j")
+
+[node name="Bug" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Bug
+100$ / 5 seconds
+Shit-for-brains cannonfodder"
+icon = ExtResource("6_y08r1")
+
+[node name="Duck" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Duck
+100$ / 5 seconds
+Shit-for-brains cannonfodder"
+icon = ExtResource("5_j5m8q")
+
+[node name="Factory" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Factory
+8000$ / 60⚡︎
+Build a tank!"
+icon = ExtResource("10_6sspi")
+
+[node name="Chat" type="TextEdit" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 0.275
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_vertical = 0
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+
+[node name="ChatLine" type="LineEdit" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 0.275
+anchor_bottom = 0.7
+offset_left = 16.0
+offset_right = -16.0
+grow_vertical = 0
+
+[node name="Panel2" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+text = "Selection"
+
+[node name="SelectionLabel" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+text = "Owned by"
+
+[node name="OwnerLabel" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+text = "Power (con/gen)"
+
+[node name="PowerLabel" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+text = "Money"
+
+[node name="Cash" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+text = "HQ Health"
+
+[node name="HQHealth" type="Label" parent="GUI/Panel2/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="gui_input" from="GUI/DragField" to="." method="_on_drag_field_gui_input"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/HeadquartersDuck" to="." method="_on_place_headquarters_pressed" binds= [1]]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/HeadquartersBug" to="." method="_on_place_headquarters_pressed" binds= [2]]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Powerplant" to="." method="_on_powerplant_pressed"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Mine" to="." method="_on_mine_pressed"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Barracks" to="." method="_on_barracks_pressed"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Bug" to="." method="_on_summon_soldier"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Duck" to="." method="_on_summon_soldier"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Factory" to="." method="_on_factory_pressed"]
+[connection signal="text_submitted" from="GUI/ChatLine" to="." method="_on_chat_line_text_submitted"]

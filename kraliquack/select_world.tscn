@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://djyky810k4j2r"]
+
+[ext_resource type="Script" uid="uid://cmvx61jqwux7f" path="res://select_world.gd" id="1_lubik"]
+
+[node name="SelectWorld" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lubik")
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_vertical = 2
+
+[node name="GetWorldsHTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="NewGameButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 96.0
+grow_horizontal = 0
+text = "Start a new world"
+
+[connection signal="item_activated" from="ItemList" to="." method="_on_item_list_item_activated"]
+[connection signal="request_completed" from="GetWorldsHTTPRequest" to="." method="_on_get_worlds_http_request_request_completed"]
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]

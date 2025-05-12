@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4iwig4g4s2s2"]
+
+[ext_resource type="Script" uid="uid://crjsbq4nyok2k" path="res://log_in.gd" id="1_iglix"]
+
+[node name="LogIn" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iglix")
+
+[node name="Username" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.2
+grow_horizontal = 2
+text = "root"
+placeholder_text = "Username"
+alignment = 1
+
+[node name="Password" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.2
+offset_top = 64.0
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "toor"
+placeholder_text = "Password"
+alignment = 1
+
+[node name="Server" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.2
+offset_top = 112.5
+offset_bottom = 143.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "s://localhost:7303/"
+placeholder_text = "Server"
+alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.8
+anchor_bottom = 0.8
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Log in"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

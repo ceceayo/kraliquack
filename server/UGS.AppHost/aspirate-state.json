@@ -1,0 +1,52 @@
+{
+  "projectPath": ".",
+  "outputPath": "aspirate-output",
+  "containerImageTags": [
+    "latest"
+  ],
+  "containerBuilder": "docker",
+  "containerRepositoryPrefix": "ugs",
+  "outputFormat": "compose",
+  "privateRegistryEmail": "aspir8@aka.ms",
+  "includeDashboard": true,
+  "secrets": {
+    "salt": "iLlkEDBzMPtLRs9Y",
+    "hash": "y2kk8fBg/ZcWC0cCdlOmt/uKDMOrl9jl6iP6LJQk7VY=",
+    "secrets": {
+      "cache-password": {
+        "value": "iLlkEDBzMPtLRs9YvcQU\u002B\u002BELx3caGWL235NgB6HBPiNX5v/Vs5LqLVMXvVVauVQHlr0="
+      },
+      "queue-password": {
+        "value": "iLlkEDBzMPtLRs9Y9ofmTJFKafXlIl\u002BeJUDwbP7pMXI7yPrSoYz0MmonmAhFg2UMgMU="
+      },
+      "postgres-password": {
+        "value": "iLlkEDBzMPtLRs9Y8QPDgKGUDLnkb5Kmc7rZuqHqcSts4OyHqqnkAl1TmSJYslFbvro="
+      },
+      "cache": {},
+      "queue": {},
+      "postgres": {
+        "POSTGRES_PASSWORD": "iLlkEDBzMPtLRs9Y8QPDgKGUDLnkb5Kmc7rZuqHqcSts4OyHqqnkAl1TmSJYslFbvro="
+      },
+      "postgresdb": {},
+      "migrationworker": {
+        "ConnectionStrings__postgresdb": "iLlkEDBzMPtLRs9YS2hxIR1guwzPISGTJ99HDd/vI28z4OCQlp/uBmtbhAlwhD0KzroYVeG6L0ElYpvCw76jv1AJp/A3MSdTL4YO5LW7LQrtSyR\u002BFWOVecy8BlDlesRIYfYjv2jolW2huhTTk9YrZ0z\u002BrGsxzarJAQ=="
+      },
+      "worker": {
+        "ConnectionStrings__cache": "iLlkEDBzMPtLRs9Yh0DZMJlg/1ipieQBNqcmxfThM3NrqrnQ1cGwE3kTpxFtgmQCzMhEVu2/OgUaaYDptbml/3wnga0oPg==",
+        "ConnectionStrings__postgresdb": "iLlkEDBzMPtLRs9YS2hxIR1guwzPISGTJ99HDd/vI28z4OCQlp/uBmtbhAlwhD0KzroYVeG6L0ElYpvCw76jv1AJp/A3MSdTL4YO5LW7LQrtSyR\u002BFWOVecy8BlDlesRIYfYjv2jolW2huhTTk9YrZ0z\u002BrGsxzarJAQ==",
+        "ConnectionStrings__queue": "iLlkEDBzMPtLRs9Y5sfpd5iyrKDbh4UhM0908PbtIWs0v6CEl53vFyIJvQdrxVhKy8peBuW7DX8lRIXCzbSAjFUbsOAhMEIEa8c="
+      },
+      "apiservice": {
+        "ConnectionStrings__cache": "iLlkEDBzMPtLRs9Yh0DZMJlg/1ipieQBNqcmxfThM3NrqrnQ1cGwE3kTpxFtgmQCzMhEVu2/OgUaaYDptbml/3wnga0oPg==",
+        "ConnectionStrings__postgresdb": "iLlkEDBzMPtLRs9YS2hxIR1guwzPISGTJ99HDd/vI28z4OCQlp/uBmtbhAlwhD0KzroYVeG6L0ElYpvCw76jv1AJp/A3MSdTL4YO5LW7LQrtSyR\u002BFWOVecy8BlDlesRIYfYjv2jolW2huhTTk9YrZ0z\u002BrGsxzarJAQ==",
+        "ConnectionStrings__queue": "iLlkEDBzMPtLRs9Y5sfpd5iyrKDbh4UhM0908PbtIWs0v6CEl53vFyIJvQdrxVhKy8peBuW7DX8lRIXCzbSAjFUbsOAhMEIEa8c="
+      },
+      "adminpanel": {
+        "ConnectionStrings__cache": "iLlkEDBzMPtLRs9Yh0DZMJlg/1ipieQBNqcmxfThM3NrqrnQ1cGwE3kTpxFtgmQCzMhEVu2/OgUaaYDptbml/3wnga0oPg==",
+        "ConnectionStrings__postgresdb": "iLlkEDBzMPtLRs9YS2hxIR1guwzPISGTJ99HDd/vI28z4OCQlp/uBmtbhAlwhD0KzroYVeG6L0ElYpvCw76jv1AJp/A3MSdTL4YO5LW7LQrtSyR\u002BFWOVecy8BlDlesRIYfYjv2jolW2huhTTk9YrZ0z\u002BrGsxzarJAQ==",
+        "ConnectionStrings__queue": "iLlkEDBzMPtLRs9Y5sfpd5iyrKDbh4UhM0908PbtIWs0v6CEl53vFyIJvQdrxVhKy8peBuW7DX8lRIXCzbSAjFUbsOAhMEIEa8c="
+      }
+    }
+  },
+  "processAllComponents": true
+}

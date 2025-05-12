@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-UGS.Worker-52086796-b182-45bd-8daf-1c4d9ac6b05d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.2.1" />
+    <PackageReference Include="Aspire.RabbitMQ.Client" Version="9.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UGS.ServiceDefaults\UGS.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\UGS.Shared\UGS.Shared.csproj" />
+  </ItemGroup>
+</Project>

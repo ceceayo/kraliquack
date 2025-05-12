@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw8pi1b5binl"]
+
+[ext_resource type="PackedScene" uid="uid://be5di4f7y4bcw" path="res://soldier.tscn" id="1_wroic"]
+[ext_resource type="Texture2D" uid="uid://gxb373to1fcr" path="res://textures/headquartersduck.png" id="2_wroic"]
+
+[node name="Soldier" instance=ExtResource("1_wroic")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_wroic")
+
+[node name="ShootTimer" type="Timer" parent="." index="1"]
+wait_time = 0.2
+autostart = true
+
+[node name="WanderTimer" type="Timer" parent="." index="2"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_shoot"]
+[connection signal="timeout" from="WanderTimer" to="." method="_wander"]
