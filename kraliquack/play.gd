@@ -5,6 +5,8 @@ var LogInScene = load("res://LogIn.tscn")
 var SoldierScene = load("res://soldier.tscn")
 var DuckScene = load("res://entities/duck.tscn")
 var BugScene = load("res://entities/bug.tscn")
+var DuckTankScene = load("res://entities/ducktank.tscn")
+var BugTankScene = load("res://entities/bugtank.tscn")
 var DeadScene = load("res://dead.tscn")
 
 
@@ -123,6 +125,11 @@ func _process(delta):
 								$GUI/Panel/ScrollContainer/FlowContainer/Duck.show()
 							else:
 								$GUI/Panel/ScrollContainer/FlowContainer/Bug.show()
+						'placedFactory':
+							if Globals.team == 1:
+								$GUI/Panel/ScrollContainer/FlowContainer/DuckTank.show()
+							else:
+								$GUI/Panel/ScrollContainer/FlowContainer/BugTank.show()
 						'destroyed':
 							Globals.change_scene_to_node(DeadScene.instantiate())
 							
@@ -160,6 +167,32 @@ func _process(delta):
 								)
 							"bug":
 								var entity = BugScene.instantiate()
+								entity.name = str(int(x[0]))
+								$entities.add_child(entity)
+								entity.set_data(
+									int(x[0]),
+									float(x[1]),
+									float(x[2]),
+									str(x[4]),
+									float(x[5]),
+									float(x[6]),
+									int(x[7])
+								)
+							"ducktank":
+								var entity = DuckTankScene.instantiate()
+								entity.name = str(int(x[0]))
+								$entities.add_child(entity)
+								entity.set_data(
+									int(x[0]),
+									float(x[1]),
+									float(x[2]),
+									str(x[4]),
+									float(x[5]),
+									float(x[6]),
+									int(x[7])
+								)
+							"bugtank":
+								var entity = BugTankScene.instantiate()
 								entity.name = str(int(x[0]))
 								$entities.add_child(entity)
 								entity.set_data(
@@ -279,5 +312,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _on_factory_pressed() -> void:
 	Globals.ws.send_text(JSON.stringify({
 		"ActionName": "PlaceFactory",
+		"Data": str(int(Globals.selection.x)) + " " + str(int(Globals.selection.y))
+	}))
+
+func _on_summon_tank() -> void:
+	Globals.ws.send_text(JSON.stringify({
+		"ActionName": "SummonTank",
 		"Data": str(int(Globals.selection.x)) + " " + str(int(Globals.selection.y))
 	}))

@@ -43,6 +43,17 @@ if t2 >= 1 then
                     MessageUser(k2, "entity", tostring(ec) .. "," .. tostring(entities[ec].x) .. "," .. tostring(entities[ec].y) .. "," .. tostring(entities[ec].type) .. "," .. tostring(entities[ec].owner) .. "," .. tostring(entities[ec].orientation) .. "," .. tostring(entities[ec].speed) .. "," .. tostring(entities[ec].health))
                 end
                 ec = ec + 1
+            elseif generators[k].type == "tank" then
+                if users[generators[k].owner].Data["team"] == "1" then
+                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "ducktank", owner = generators[k].owner, orientation = 0, speed = 0, health = 80}
+                else
+                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "bugtank", owner = generators[k].owner, orientation = 0, speed = 0, health = 80}
+                end
+                
+                for k2,v2 in iterateDict(users) do
+                    MessageUser(k2, "entity", tostring(ec) .. "," .. tostring(entities[ec].x) .. "," .. tostring(entities[ec].y) .. "," .. tostring(entities[ec].type) .. "," .. tostring(entities[ec].owner) .. "," .. tostring(entities[ec].orientation) .. "," .. tostring(entities[ec].speed) .. "," .. tostring(entities[ec].health))
+                end
+                ec = ec + 1
             end
             generators[k] = nil
         end

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4017q5c4v4v0"]
+
+[ext_resource type="PackedScene" uid="uid://be5di4f7y4bcw" path="res://soldier.tscn" id="1_82t7f"]
+[ext_resource type="Texture2D" uid="uid://cl3lbd0b3tb6u" path="res://textures/tankduck.png" id="2_82t7f"]
+
+[node name="DuckTank" instance=ExtResource("1_82t7f")]
+max_speed = 90.0
+range = 196
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_82t7f")
+
+[node name="ShootTimer" type="Timer" parent="." index="1"]
+wait_time = 0.5
+autostart = true
+
+[node name="WanderTimer" type="Timer" parent="." index="2"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_shoot"]
+[connection signal="timeout" from="WanderTimer" to="." method="_wander"]

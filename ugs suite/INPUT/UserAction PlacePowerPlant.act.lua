@@ -41,8 +41,8 @@ userMakePurchaseApply(userToken, 1000)
 tiles[y * width + x].tile = "p"
 tiles[y * width + x].owner = userToken
 
-users[userToken].Data["powerGeneration"] = tostring(tonumber(users[userToken].Data["powerGeneration"]) + 50)
-users[userToken].Data["powerConsumption"] = tostring(tonumber(users[userToken].Data["powerConsumption"]) + 20)
+users[userToken].Data["powerGeneration"] = tostring(tonumber(users[userToken].Data["powerGeneration"]) + 75)
+users[userToken].Data["powerConsumption"] = tostring(tonumber(users[userToken].Data["powerConsumption"]) + 15)
 
 MessageUser(userToken, "power", users[userToken].Data["powerGeneration"] .. " " .. users[userToken].Data["powerConsumption"])
 

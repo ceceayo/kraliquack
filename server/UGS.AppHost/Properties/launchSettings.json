@@ -24,6 +24,20 @@
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:15069"
+    },
+    "https final": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Release",
+        "DOTNET_ENVIRONMENT": "Release",
+        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21050",
+        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22093"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:17108;http://localhost:15069",
+      "nativeDebugging": false,
+      "hotReloadEnabled": false
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"

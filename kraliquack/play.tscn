@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://mhccyxvexb0u"]
+[gd_scene load_steps=15 format=3 uid="uid://mhccyxvexb0u"]
 
 [ext_resource type="Script" uid="uid://ci3b0f8h57mk3" path="res://play.gd" id="1_b5e5s"]
 [ext_resource type="TileSet" uid="uid://cofinanjot4bs" path="res://tileset.tres" id="2_wnt6v"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dct2yup1yrhtq" path="res://textures/barracks.png" id="8_3ib3j"]
 [ext_resource type="Texture2D" uid="uid://hfcu8uao8s8w" path="res://textures/mine.png" id="9_iu7w4"]
 [ext_resource type="Texture2D" uid="uid://chicqocp4kltf" path="res://textures/factory.png" id="10_6sspi"]
+[ext_resource type="Texture2D" uid="uid://cl3lbd0b3tb6u" path="res://textures/tankduck.png" id="11_ccytq"]
+[ext_resource type="Texture2D" uid="uid://bt8k0oslxy81n" path="res://textures/tankbug.png" id="12_hkd06"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ca36m"]
 
@@ -131,7 +133,7 @@ visible = false
 layout_mode = 2
 text = "Duck
 100$ / 5 seconds
-Shit-for-brains cannonfodder"
+Cannonfodder"
 icon = ExtResource("5_j5m8q")
 
 [node name="Factory" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
@@ -141,6 +143,22 @@ text = "Factory
 8000$ / 60⚡︎
 Build a tank!"
 icon = ExtResource("10_6sspi")
+
+[node name="DuckTank" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Tank
+1000$ / 25 seconds
+Motorised Warfare!"
+icon = ExtResource("11_ccytq")
+
+[node name="BugTank" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+text = "Tank
+1000$ / 25 seconds
+Motorised Warfare!"
+icon = ExtResource("12_hkd06")
 
 [node name="Chat" type="TextEdit" parent="GUI"]
 layout_mode = 1
@@ -238,4 +256,6 @@ layout_mode = 2
 [connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Bug" to="." method="_on_summon_soldier"]
 [connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Duck" to="." method="_on_summon_soldier"]
 [connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/Factory" to="." method="_on_factory_pressed"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/DuckTank" to="." method="_on_summon_tank"]
+[connection signal="pressed" from="GUI/Panel/ScrollContainer/FlowContainer/BugTank" to="." method="_on_summon_tank"]
 [connection signal="text_submitted" from="GUI/ChatLine" to="." method="_on_chat_line_text_submitted"]
