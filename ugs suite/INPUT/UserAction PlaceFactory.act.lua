@@ -29,7 +29,7 @@ if cellCanBeBuiltOn(x,y) == false then
     return
 end
 
-if userMakePurchase(userToken, 8000) == false then
+if userMakePurchase(userToken, 5000) == false then
     Log("User cannot afford Barracks")
     return
 end
@@ -41,7 +41,7 @@ end
 
 Log("All checks passed")
 
-userMakePurchaseApply(userToken, 8000)
+userMakePurchaseApply(userToken, 5000)
 userRequirePowerApply(userToken, 60)
 
 tiles[y * width + x].tile = "f"

@@ -11,11 +11,10 @@ range = 196
 texture = ExtResource("2_82t7f")
 
 [node name="ShootTimer" type="Timer" parent="." index="1"]
-wait_time = 0.5
 autostart = true
 
 [node name="WanderTimer" type="Timer" parent="." index="2"]
-wait_time = 2.0
+wait_time = 6.0
 one_shot = true
 
 [connection signal="timeout" from="ShootTimer" to="." method="_shoot"]

@@ -37,6 +37,7 @@ end
 
 if userMakePurchase(userToken, 2500) == false then
     Log("User cannot afford HQ")
+    Log("What the fuck happened here??")
     return
 end
 
@@ -67,5 +68,5 @@ end
 users[userToken].Data["hqPos"] = tostring(y*width+x)
 
 
-users[userToken].Data["hqHealth"] = "350"
-MessageUser(userToken, "hqHealth", "350")
+users[userToken].Data["hqHealth"] = "100"
+MessageUser(userToken, "hqHealth", "100")

@@ -1,6 +1,6 @@
 values = split(actionData, " ")
 
-if #values ~= 2 then
+if #values ~= 2 and #values ~= 3 then
     Log("Invalid data length")
     return
 end
@@ -34,6 +34,10 @@ if entities[shooter].type == "duck" then
     damage = 1
 elseif entities[shooter].type == "bug" then
     damage = 1
+elseif entities[shooter].type == "ducktank" then
+    damage = 8
+elseif entities[shooter].type == "bugtank" then
+    damage = 8
 end
 
 

@@ -9,7 +9,7 @@
 texture = ExtResource("2_py186")
 
 [node name="ShootTimer" type="Timer" parent="." index="1"]
-wait_time = 0.2
+wait_time = 0.4
 autostart = true
 
 [node name="WanderTimer" type="Timer" parent="." index="2"]

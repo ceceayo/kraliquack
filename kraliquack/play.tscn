@@ -58,6 +58,8 @@ anchor_left = 0.7
 anchor_top = 0.6
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 0
@@ -100,8 +102,8 @@ icon = ExtResource("6_y08r1")
 visible = false
 layout_mode = 2
 text = "Powerplant
-1000$ / 20⚡︎
-+50⚡︎"
+1000$ / 15⚡︎
++75⚡︎"
 icon = ExtResource("7_y08r1")
 
 [node name="Mine" type="Button" parent="GUI/Panel/ScrollContainer/FlowContainer"]
@@ -140,7 +142,7 @@ icon = ExtResource("5_j5m8q")
 visible = false
 layout_mode = 2
 text = "Factory
-8000$ / 60⚡︎
+5000$ / 60⚡︎
 Build a tank!"
 icon = ExtResource("10_6sspi")
 
@@ -163,9 +165,8 @@ icon = ExtResource("12_hkd06")
 [node name="Chat" type="TextEdit" parent="GUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.7
-anchor_right = 0.275
-anchor_bottom = 1.0
+anchor_right = 0.33
+anchor_bottom = 0.3
 offset_left = 16.0
 offset_top = 16.0
 offset_right = -16.0
@@ -185,19 +186,21 @@ empty_selection_clipboard_enabled = false
 [node name="ChatLine" type="LineEdit" parent="GUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.7
-anchor_right = 0.275
-anchor_bottom = 0.7
+anchor_top = 0.3
+anchor_right = 0.33
+anchor_bottom = 0.3
 offset_left = 16.0
+offset_top = -0.400009
 offset_right = -16.0
+offset_bottom = 32.0
 grow_vertical = 0
 
 [node name="Panel2" type="Panel" parent="GUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.8
+anchor_left = 0.7
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 0.6
 offset_left = 16.0
 offset_top = 16.0
 offset_right = -16.0

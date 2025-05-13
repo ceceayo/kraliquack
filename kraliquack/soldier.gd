@@ -3,7 +3,7 @@ extends Node2D
 var is_set_up = false
 var is_local = false
 
-var speed: float = 60.0
+@onready var speed: float = max_speed
 
 @export var max_speed = 60.0
 @export var range = 2*64

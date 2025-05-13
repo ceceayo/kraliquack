@@ -34,9 +34,9 @@ if t2 >= 1 then
         if generators[k].time == generators[k].timeNeeded then
             if generators[k].type == "soldier" then
                 if users[generators[k].owner].Data["team"] == "1" then
-                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "duck", owner = generators[k].owner, orientation = 0, speed = 0, health = 25}
+                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "duck", owner = generators[k].owner, orientation = 0, speed = 0, health = 10}
                 else
-                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "bug", owner = generators[k].owner, orientation = 0, speed = 0, health = 25}
+                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "bug", owner = generators[k].owner, orientation = 0, speed = 0, health = 10}
                 end
                 
                 for k2,v2 in iterateDict(users) do
@@ -45,9 +45,9 @@ if t2 >= 1 then
                 ec = ec + 1
             elseif generators[k].type == "tank" then
                 if users[generators[k].owner].Data["team"] == "1" then
-                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "ducktank", owner = generators[k].owner, orientation = 0, speed = 0, health = 80}
+                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "ducktank", owner = generators[k].owner, orientation = 0, speed = 0, health = 30}
                 else
-                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "bugtank", owner = generators[k].owner, orientation = 0, speed = 0, health = 80}
+                    entities[ec] = {x = generators[k].x, y = generators[k].y, type = "bugtank", owner = generators[k].owner, orientation = 0, speed = 0, health = 30}
                 end
                 
                 for k2,v2 in iterateDict(users) do
